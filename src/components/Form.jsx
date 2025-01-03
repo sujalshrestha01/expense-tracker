@@ -2,17 +2,25 @@ import React from "react";
 import { useState } from "react";
 
 function Form({ setExpenses }) {
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
-  const [amount, setAmount] = useState("");
+  // const [title, setTitle] = useState("");
+  // const [category, setCategory] = useState("");
+  // const [amount, setAmount] = useState("");
+  const [expense, setExpense] = useState({
+    title:'',
+    category:'',
+    amount:'',
+    id:crypto.randomUUID()
+  })
   const handleSubmit = (e) => {
     e.preventDefault();
-    const expense = { title, category, amount, id: crypto.randomUUID() };
+    // const expense = { title, category, amount, id: crypto.randomUUID() };
     if (expense.title && expense.amount && expense.category) {
       setExpenses((prev) => [...prev, expense]);
-      setTitle('') 
-      setCategory('')
-      setAmount('')
+      setExpense({
+        title:'',
+        category:'',
+        amount:''
+      })
     }
     // let expense={...getFormData(e.target),id:crypto.randomUUID()}
     // if(expense.title && expense.amount)
@@ -38,8 +46,8 @@ function Form({ setExpenses }) {
             type="text"
             name="title"
             id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={expense.title}
+            onChange={(e) => setExpense((prev)=>({...prev,title:e.target.value}))}
           />
         </div>
         <div className="flex flex-col w-[300px]">
@@ -48,8 +56,8 @@ function Form({ setExpenses }) {
             className="border border-black outline-none"
             name="category"
             id=""
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
+            value={expense.category}
+            onChange={(e) => setExpense((prev)=>({...prev,category:e.target.value}))}
           >
             <option value="" hidden>
               Select Category
@@ -68,8 +76,8 @@ function Form({ setExpenses }) {
             type="number"
             name="amount"
             id="amount"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
+            value={expense.amount}
+            onChange={(e) => setExpense((prev)=>({...prev,amount:e.target.value}))}
           />
         </div>
         <input
