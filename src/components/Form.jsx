@@ -11,14 +11,36 @@ function Form({ setExpenses }) {
     amount:'',
     id:crypto.randomUUID()
   })
-  const handleChange=(e)=>{
-    const {name,value}=e.target
-    setExpense((prev)=>({...prev,[name]:value}))
+  const [error, setError] = useState('')
+  const validate=(formData)=>{
+    let errors={}
+    if(!formData.title)
+      errors.title='title is req'
+    if(!formData.category)
+      errors.category='category is req'
+    if(!formData.amount)
+      errors.amount='amount is req'
+    setError(errors)
+    return errors
+
+
   }
+  const handleChange=(e)=>{
+  
+    const {name,value}=e.target
+    setError((prev)=>({...prev,[name]:null}))
+    setExpense((prev)=>({...prev,[name]:value,id:crypto.randomUUID()}))
+  }
+  // const handleInput=(e)=>{
+  //   const key=e.target.name
+  //   setError((prev)=>({...prev,[key]:null}))
+  // }
   const handleSubmit = (e) => {
     e.preventDefault();
     // const expense = { title, category, amount, id: crypto.randomUUID() };
-    if (expense.title && expense.amount && expense.category) {
+     const validateResult= validate(expense)
+     console.log(validateResult)
+     if(!Object.keys(validateResult).length){
       setExpenses((prev) => [...prev, expense]);
       setExpense({
         title:'',
@@ -26,6 +48,7 @@ function Form({ setExpenses }) {
         amount:''
       })
     }
+    
    
     // let expense={...getFormData(e.target),id:crypto.randomUUID()}
     // if(expense.title && expense.amount)
@@ -44,7 +67,7 @@ function Form({ setExpenses }) {
   return (
     <div>
       <form action="" onSubmit={handleSubmit}>
-        <div className="flex flex-col w-[300px]">
+        <div className="flex flex-col w-[300px] mb-5 relative">
           <label htmlFor="title">Title</label>
           <input
             className="border border-black outline-none"
@@ -54,9 +77,11 @@ function Form({ setExpenses }) {
             value={expense.title}
             // onChange={(e) => setExpense((prev)=>({...prev,title:e.target.value}))}
             onChange={handleChange}
+           
           />
+          <p className="absolute left-0 -bottom-4 text-sm text-red-600">{error.title}</p>
         </div>
-        <div className="flex flex-col w-[300px]">
+        <div className="flex relative flex-col w-[300px] mb-5">
           <label htmlFor="category">Category</label>
           <select
             className="border border-black outline-none"
@@ -65,6 +90,7 @@ function Form({ setExpenses }) {
             value={expense.category}
             // onChange={(e) => setExpense((prev)=>({...prev,category:e.target.value}))}
             onChange={handleChange}
+            
           >
             <option value="" hidden>
               Select Category
@@ -75,8 +101,9 @@ function Form({ setExpenses }) {
             <option value="education">Education</option>
             <option value="medicine">Medicine</option>
           </select>
+          <p className="absolute left-0 -bottom-4 text-sm text-red-600">{error.category}</p>
         </div>
-        <div className="flex flex-col w-[300px]">
+        <div className="flex relative flex-col w-[300px] mb-5">
           <label htmlFor="amount">Amount</label>
           <input
             className="border border-black outline-none"
@@ -86,7 +113,9 @@ function Form({ setExpenses }) {
             value={expense.amount}
             // onChange={(e) => setExpense((prev)=>({...prev,amount:e.target.value}))}
             onChange={handleChange}
+        
           />
+          <p className="absolute left-0 -bottom-4 text-sm text-red-600">{error.amount}</p>
         </div>
         <input
           type="submit"
