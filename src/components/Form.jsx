@@ -11,6 +11,11 @@ function Form({ setExpenses }) {
     amount:'',
     id:crypto.randomUUID()
   })
+  const handleChange=(e)=>{
+    
+    
+    setExpense((prev)=>({...prev,[e.target.name]:e.target.value}))
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
     // const expense = { title, category, amount, id: crypto.randomUUID() };
@@ -22,6 +27,7 @@ function Form({ setExpenses }) {
         amount:''
       })
     }
+   
     // let expense={...getFormData(e.target),id:crypto.randomUUID()}
     // if(expense.title && expense.amount)
     // setExpenses((prev)=>([...prev,expense]))
@@ -47,7 +53,8 @@ function Form({ setExpenses }) {
             name="title"
             id="title"
             value={expense.title}
-            onChange={(e) => setExpense((prev)=>({...prev,title:e.target.value}))}
+            // onChange={(e) => setExpense((prev)=>({...prev,title:e.target.value}))}
+            onChange={handleChange}
           />
         </div>
         <div className="flex flex-col w-[300px]">
@@ -57,7 +64,8 @@ function Form({ setExpenses }) {
             name="category"
             id=""
             value={expense.category}
-            onChange={(e) => setExpense((prev)=>({...prev,category:e.target.value}))}
+            // onChange={(e) => setExpense((prev)=>({...prev,category:e.target.value}))}
+            onChange={handleChange}
           >
             <option value="" hidden>
               Select Category
@@ -77,7 +85,8 @@ function Form({ setExpenses }) {
             name="amount"
             id="amount"
             value={expense.amount}
-            onChange={(e) => setExpense((prev)=>({...prev,amount:e.target.value}))}
+            // onChange={(e) => setExpense((prev)=>({...prev,amount:e.target.value}))}
+            onChange={handleChange}
           />
         </div>
         <input
