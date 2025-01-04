@@ -12,9 +12,8 @@ function Form({ setExpenses }) {
     id:crypto.randomUUID()
   })
   const handleChange=(e)=>{
-    
-    
-    setExpense((prev)=>({...prev,[e.target.name]:e.target.value}))
+    const {name,value}=e.target
+    setExpense((prev)=>({...prev,[name]:value}))
   }
   const handleSubmit = (e) => {
     e.preventDefault();
