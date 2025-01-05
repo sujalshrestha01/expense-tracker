@@ -1,36 +1,32 @@
 import React from "react";
 import { useState } from "react";
+import Input from "./Input";
+import SelectOption from "./SelectOption";
 
 function Form({ setExpenses }) {
   // const [title, setTitle] = useState("");
   // const [category, setCategory] = useState("");
   // const [amount, setAmount] = useState("");
   const [expense, setExpense] = useState({
-    title:'',
-    category:'',
-    amount:'',
-    id:crypto.randomUUID()
-  })
-  const [error, setError] = useState('')
-  const validate=(formData)=>{
-    let errors={}
-    if(!formData.title)
-      errors.title='title is req'
-    if(!formData.category)
-      errors.category='category is req'
-    if(!formData.amount)
-      errors.amount='amount is req'
-    setError(errors)
-    return errors
-
-
-  }
-  const handleChange=(e)=>{
-  
-    const {name,value}=e.target
-    setError((prev)=>({...prev,[name]:null}))
-    setExpense((prev)=>({...prev,[name]:value,id:crypto.randomUUID()}))
-  }
+    title: "",
+    category: "",
+    amount: "",
+    id: crypto.randomUUID(),
+  });
+  const [error, setError] = useState("");
+  const validate = (formData) => {
+    let errors = {};
+    if (!formData.title) errors.title = "title is req";
+    if (!formData.category) errors.category = "category is req";
+    if (!formData.amount) errors.amount = "amount is req";
+    setError(errors);
+    return errors;
+  };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setError((prev) => ({ ...prev, [name]: null }));
+    setExpense((prev) => ({ ...prev, [name]: value, id: crypto.randomUUID() }));
+  };
   // const handleInput=(e)=>{
   //   const key=e.target.name
   //   setError((prev)=>({...prev,[key]:null}))
@@ -38,18 +34,17 @@ function Form({ setExpenses }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     // const expense = { title, category, amount, id: crypto.randomUUID() };
-     const validateResult= validate(expense)
-     console.log(validateResult)
-     if(!Object.keys(validateResult).length){
+    const validateResult = validate(expense);
+
+    if (!Object.keys(validateResult).length) {
       setExpenses((prev) => [...prev, expense]);
       setExpense({
-        title:'',
-        category:'',
-        amount:''
-      })
+        title: "",
+        category: "",
+        amount: "",
+      });
     }
-    
-   
+
     // let expense={...getFormData(e.target),id:crypto.randomUUID()}
     // if(expense.title && expense.amount)
     // setExpenses((prev)=>([...prev,expense]))
@@ -67,7 +62,7 @@ function Form({ setExpenses }) {
   return (
     <div>
       <form action="" onSubmit={handleSubmit}>
-        <div className="flex flex-col w-[300px] mb-5 relative">
+        {/* <div className="flex flex-col w-[300px] mb-5 relative">
           <label htmlFor="title">Title</label>
           <input
             className="border border-black outline-none"
@@ -77,11 +72,20 @@ function Form({ setExpenses }) {
             value={expense.title}
             // onChange={(e) => setExpense((prev)=>({...prev,title:e.target.value}))}
             onChange={handleChange}
-           
           />
-          <p className="absolute left-0 -bottom-4 text-sm text-red-600">{error.title}</p>
-        </div>
-        <div className="flex relative flex-col w-[300px] mb-5">
+          <p className="absolute left-0 -bottom-4 text-sm text-red-600">
+            {error.title}
+          </p>
+        </div> */}
+        <Input
+          label="Title"
+          id="title"
+          name="title"
+          value={expense.title}
+          onChange={handleChange}
+          error={error.title}
+        />
+        {/* <div className="flex relative flex-col w-[300px] mb-5">
           <label htmlFor="category">Category</label>
           <select
             className="border border-black outline-none"
@@ -90,7 +94,6 @@ function Form({ setExpenses }) {
             value={expense.category}
             // onChange={(e) => setExpense((prev)=>({...prev,category:e.target.value}))}
             onChange={handleChange}
-            
           >
             <option value="" hidden>
               Select Category
@@ -101,9 +104,28 @@ function Form({ setExpenses }) {
             <option value="education">Education</option>
             <option value="medicine">Medicine</option>
           </select>
-          <p className="absolute left-0 -bottom-4 text-sm text-red-600">{error.category}</p>
-        </div>
-        <div className="flex relative flex-col w-[300px] mb-5">
+          <p className="absolute left-0 -bottom-4 text-sm text-red-600">
+            {error.category}
+          </p>
+        </div> */}
+        <SelectOption
+          label="category"
+          id="category"
+          name="category"
+          value={expense.category}
+          onChange={handleChange}
+          error={error.category}
+          options={[
+            "Grocery",
+            "Clothes",
+            "Bills",
+            "Education",
+            "Medicine",
+          ]}
+          defaultOption='Select Category'
+        />
+        
+        {/* <div className="flex relative flex-col w-[300px] mb-5">
           <label htmlFor="amount">Amount</label>
           <input
             className="border border-black outline-none"
@@ -113,10 +135,19 @@ function Form({ setExpenses }) {
             value={expense.amount}
             // onChange={(e) => setExpense((prev)=>({...prev,amount:e.target.value}))}
             onChange={handleChange}
-        
           />
-          <p className="absolute left-0 -bottom-4 text-sm text-red-600">{error.amount}</p>
-        </div>
+          <p className="absolute left-0 -bottom-4 text-sm text-red-600">
+            {error.amount}
+          </p>
+        </div> */}
+        <Input
+          label="amount"
+          id="amount"
+          name="amount"
+          value={expense.amount}
+          onChange={handleChange}
+          error={error.amount}
+        />
         <input
           type="submit"
           value="ADD"
