@@ -11,14 +11,38 @@ function Form({ setExpenses }) {
     title: "",
     category: "",
     amount: "",
-    id: crypto.randomUUID(),
   });
   const [error, setError] = useState("");
+  const validationConfig = {
+    title: [{ required: true, message: "title is req" }],
+    category: [{ required: true, message: "category is req" }],
+    amount: [
+      { required: true, message: "amount is req" },
+      { positiveValue: true, message: "enter positive value" },
+      { number: true, message: "enter a number" },
+    ],
+    id: [],
+  };
   const validate = (formData) => {
     let errors = {};
-    if (!formData.title) errors.title = "title is req";
-    if (!formData.category) errors.category = "category is req";
-    if (!formData.amount) errors.amount = "amount is req";
+    Object.entries(formData).forEach(([key, value]) => {
+      validationConfig[key].forEach((rule) => {
+        if (rule.required && !value) {
+          errors[key] = rule.message;
+        }
+
+        if (rule.positiveValue && value < 0) {
+          errors[key] = rule.message;
+        }
+        if(rule.number && isNaN(value)){
+          errors[key]=rule.message
+        }
+      });
+    });
+    // if (!formData.title) errors.title = "title is req";
+    // if (!formData.category) errors.category = "category is req";
+    // if (!formData.amount) errors.amount = "amount is req";
+
     setError(errors);
     return errors;
   };
@@ -115,16 +139,10 @@ function Form({ setExpenses }) {
           value={expense.category}
           onChange={handleChange}
           error={error.category}
-          options={[
-            "Grocery",
-            "Clothes",
-            "Bills",
-            "Education",
-            "Medicine",
-          ]}
-          defaultOption='Select Category'
+          options={["Grocery", "Clothes", "Bills", "Education", "Medicine"]}
+          defaultOption="Select Category"
         />
-        
+
         {/* <div className="flex relative flex-col w-[300px] mb-5">
           <label htmlFor="amount">Amount</label>
           <input
