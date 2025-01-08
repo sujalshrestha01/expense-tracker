@@ -23,10 +23,10 @@ function ContextMenu({
         className="hover:bg-slate-300"
         onClick={() => {
           setPointerPosition({});
-          setEditingRowID(true);
           const expenseToEdit = expenses.find(
             (expense) => expense.id === rowId
           );
+          setEditingRowID(expenseToEdit.id)
           setExpense(expenseToEdit);
         }}
       >

@@ -13,7 +13,6 @@ function Form({
   // const [title, setTitle] = useState("");
   // const [category, setCategory] = useState("");
   // const [amount, setAmount] = useState("");
-
   const [error, setError] = useState("");
   const validationConfig = {
     title: [{ required: true, message: "title is req" }],
@@ -59,21 +58,27 @@ function Form({
   // }
   const handleSubmit = (e) => {
     e.preventDefault();
-    // const expense = { title, category, amount, id: crypto.randomUUID() };
     const validateResult = validate(expense);
 
-    if (!Object.keys(validateResult).length) {
-      setExpenses((prev) => [...prev, expense]);
-      setExpense({
-        title: "",
-        category: "",
-        amount: "",
-      });
+    if (Object.keys(validateResult).length) return;
+    if (editingRowID) {
+      setExpenses((prev) =>
+        prev.map((expenseEle) =>
+          expenseEle.id === editingRowID
+            ? { ...expense, id: editingRowID }
+            : expenseEle
+        )
+      );
+      setEditingRowID("");
+    } else {
+      setExpenses((prev) => [...prev, { ...expense, id: crypto.randomUUID() }]);
     }
 
-    // let expense={...getFormData(e.target),id:crypto.randomUUID()}
-    // if(expense.title && expense.amount)
-    // setExpenses((prev)=>([...prev,expense]))
+    setExpense({
+      title: "",
+      category: "",
+      amount: "",
+    });
   };
 
   //  const getFormData=(form)=>{
@@ -170,9 +175,6 @@ function Form({
         />
         <input
           type="submit"
-          onClick={() => {
-            setEditingRowID(false);
-          }}
           value={`${editingRowID ? "SAVE" : "ADD"}`}
           className=" bg-red-600 border border-black w-[300px] "
         />
