@@ -19,8 +19,9 @@ function Form({
     category: [{ required: true, message: "category is req" }],
     amount: [
       { required: true, message: "amount is req" },
+      {pattern:/^\d+(\.\d+)?$/, message:'enter valid number'},
       { positiveValue: true, message: "enter positive value" },
-      { number: true, message: "enter a number" },
+      // { number: true, message: "enter a number" },
     ],
     id: [],
   };
@@ -31,13 +32,16 @@ function Form({
         if (rule.required && !value) {
           errors[key] = rule.message;
         }
+        if(rule.pattern && !rule.pattern.test(value)){
+          errors[key] = rule.message;
+        }
 
         if (rule.positiveValue && value < 0) {
           errors[key] = rule.message;
         }
-        if (rule.number && isNaN(value)) {
-          errors[key] = rule.message;
-        }
+        // if (rule.number && isNaN(value)) {
+        //   errors[key] = rule.message;
+        // }
       });
     });
     // if (!formData.title) errors.title = "title is req";
