@@ -9,6 +9,12 @@ import ExpenseData from "./ExpenseData";
 function App() {
   const [expenses, setExpenses] = useState(ExpenseData);
   const [pointerPosition, setPointerPosition] = useState({});
+  const [expense, setExpense] = useState({
+      title: "",
+      category: "",
+      amount: "",
+    });
+  const [editingRowID, setEditingRowID] = useState('')
 
   return (
     <>
@@ -17,12 +23,14 @@ function App() {
         className="flex justify-around"
         onClick={() => setPointerPosition({})}
       >
-        <Form setExpenses={setExpenses} />
+        <Form editingRowID={editingRowID} setEditingRowID={setEditingRowID} setExpenses={setExpenses} expense={expense} setExpense={setExpense} />
         <Table
+          setEditingRowID={setEditingRowID}
           setExpenses={setExpenses}
           expenses={expenses}
           pointerPosition={pointerPosition}
           setPointerPosition={setPointerPosition}
+          setExpense={setExpense}
         />
       </div>
     </>

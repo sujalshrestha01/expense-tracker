@@ -3,15 +3,17 @@ import { useState } from "react";
 import Input from "./Input";
 import SelectOption from "./SelectOption";
 
-function Form({ setExpenses }) {
+function Form({
+  setExpenses,
+  expense,
+  setExpense,
+  editingRowID,
+  setEditingRowID,
+}) {
   // const [title, setTitle] = useState("");
   // const [category, setCategory] = useState("");
   // const [amount, setAmount] = useState("");
-  const [expense, setExpense] = useState({
-    title: "",
-    category: "",
-    amount: "",
-  });
+
   const [error, setError] = useState("");
   const validationConfig = {
     title: [{ required: true, message: "title is req" }],
@@ -34,8 +36,8 @@ function Form({ setExpenses }) {
         if (rule.positiveValue && value < 0) {
           errors[key] = rule.message;
         }
-        if(rule.number && isNaN(value)){
-          errors[key]=rule.message
+        if (rule.number && isNaN(value)) {
+          errors[key] = rule.message;
         }
       });
     });
@@ -168,7 +170,10 @@ function Form({ setExpenses }) {
         />
         <input
           type="submit"
-          value="ADD"
+          onClick={() => {
+            setEditingRowID(false);
+          }}
+          value={`${editingRowID ? "SAVE" : "ADD"}`}
           className=" bg-red-600 border border-black w-[300px] "
         />
       </form>

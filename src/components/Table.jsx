@@ -3,7 +3,14 @@ import { useState } from "react";
 import { useFilter } from "../hooks/useFilter";
 import ContextMenu from "./ContextMenu";
 
-function Table({ expenses, setExpenses, pointerPosition, setPointerPosition }) {
+function Table({
+  setEditingRowID,
+  expenses,
+  setExpenses,
+  setExpense,
+  pointerPosition,
+  setPointerPosition,
+}) {
   const [rowId, setRowId] = useState("");
   // const [selectedCategory, setSelectedCategory] = useState("")
   // let handlefilterCategory=(e)=>{
@@ -23,6 +30,9 @@ function Table({ expenses, setExpenses, pointerPosition, setPointerPosition }) {
   return (
     <div>
       <ContextMenu
+        setEditingRowID={setEditingRowID}
+        expenses={expenses}
+        setExpense={setExpense}
         setExpenses={setExpenses}
         pointerPosition={pointerPosition}
         setPointerPosition={setPointerPosition}

@@ -13,7 +13,7 @@ function SelectOption({ label, id, name, value, onChange, options, defaultOption
       >
        {defaultOption && <option value={defaultOption} hidden>{defaultOption}</option>}
         {options.map((option,index) => (
-          <option key={crypto.randomUUID()}  value={option} hidden={index===0?true:false}>{option}</option>
+          <option key={crypto.randomUUID()}  value={option} >{option}</option>
         ))}
       </select>
       <p className="absolute left-0 -bottom-4 text-sm text-red-600">{error}</p>

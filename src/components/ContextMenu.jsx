@@ -1,9 +1,12 @@
 import React from "react";
 
 function ContextMenu({
+  setEditingRowID,
   pointerPosition,
   setPointerPosition,
   setExpenses,
+  expenses,
+  setExpense,
   rowId,
 }) {
   return (
@@ -20,6 +23,11 @@ function ContextMenu({
         className="hover:bg-slate-300"
         onClick={() => {
           setPointerPosition({});
+          setEditingRowID(true);
+          const expenseToEdit = expenses.find(
+            (expense) => expense.id === rowId
+          );
+          setExpense(expenseToEdit);
         }}
       >
         Edit
