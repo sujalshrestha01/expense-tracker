@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { useFilter } from "../hooks/useFilter";
 import ContextMenu from "./ContextMenu";
+import UpArrow from "../assets/upArrow.png";
+import DownArrow from "../assets/downArrow.png";
 
 function Table({
   setEditingRowID,
@@ -41,7 +43,16 @@ function Table({
       <table className="table-auto border-collapse border border-black">
         <thead>
           <tr className="border-black border">
-            <th className="border-black border">Title</th>
+            <th className="border-black border">
+              Title{" "}
+              <button onClick={()=>{
+                setExpenses((prev) =>
+                  [...prev].sort((a, b) => a.title.localeCompare(b.title))
+                );
+              }}>
+                <img className="h-[18px]" src={UpArrow} alt="" />
+              </button>
+            </th>
             <th className="border-black border">
               <select
                 className="outline-none"
@@ -57,7 +68,27 @@ function Table({
                 <option value="medicine">Medicine</option>
               </select>
             </th>
-            <th className="border-black">Amount</th>
+            <th className="border-black">
+              Amount{" "}
+              <button
+                onClick={() => {
+                  setExpenses((prev) =>
+                    [...prev].sort((a, b) => a.amount - b.amount)
+                  );
+                }}
+              >
+                <img className="h-[18px]" src={UpArrow} alt="" srcSet="" />
+              </button>
+              <button
+                onClick={() => {
+                  setExpenses((prev) =>
+                    [...prev].sort((a, b) => b.amount - a.amount)
+                  );
+                }}
+              >
+                <img className="h-[18px]" src={DownArrow} alt="" />
+              </button>{" "}
+            </th>
           </tr>
         </thead>
         <tbody>

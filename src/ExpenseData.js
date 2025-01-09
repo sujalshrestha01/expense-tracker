@@ -2,25 +2,25 @@ export default [
     {
         title: "book" ,
         category: "Education" ,
-        amount:50 ,
+        amount:20 ,
         id: crypto.randomUUID()
     },
     {
-        title: "milk" ,
+        title: "a" ,
         category: "Grocery" ,
         amount:50 ,
         id: crypto.randomUUID()
     },
     {
-        title: "milk" ,
+        title: "b" ,
         category: "Grocery" ,
-        amount:50 ,
+        amount:10 ,
         id: crypto.randomUUID()
     },
     {
-        title: "milk" ,
-        category: "Grocery" ,
-        amount:50 ,
+        title: "k" ,
+        category: "Bills" ,
+        amount:5000 ,
         id: crypto.randomUUID()
     }
     
