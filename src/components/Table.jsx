@@ -29,6 +29,7 @@ function Table({
     (acc, expense) => acc + Number(expense.amount),
     0
   );
+  console.log("rendering")
   return (
     <div>
       <ContextMenu

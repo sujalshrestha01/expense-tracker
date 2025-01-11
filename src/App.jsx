@@ -21,7 +21,10 @@ function App() {
       <Header />
       <div
         className="flex justify-around"
-        onClick={() => setPointerPosition({})}
+        onClick={() =>{ 
+          if(pointerPosition.left){
+            setPointerPosition({})}}
+          }
       >
         <Form editingRowID={editingRowID} setEditingRowID={setEditingRowID} setExpenses={setExpenses} expense={expense} setExpense={setExpense} />
         <Table
