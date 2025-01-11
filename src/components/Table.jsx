@@ -14,6 +14,7 @@ function Table({
   setPointerPosition,
 }) {
   const [rowId, setRowId] = useState("");
+  const [originalExpenses] = useState(expenses);
   // const [selectedCategory, setSelectedCategory] = useState("")
   // let handlefilterCategory=(e)=>{
   //     setSelectedCategory(e.target.value)
@@ -29,7 +30,7 @@ function Table({
     (acc, expense) => acc + Number(expense.amount),
     0
   );
-  console.log("rendering")
+  console.log("rendering");
   return (
     <div>
       <ContextMenu
@@ -41,16 +42,18 @@ function Table({
         setPointerPosition={setPointerPosition}
         rowId={rowId}
       />
-      <table className="table-auto border-collapse border border-black">
+      <table className="table-auto text-center border-collapse border border-black">
         <thead>
           <tr className="border-black border">
             <th className="border-black border">
               Title{" "}
-              <button onClick={()=>{
-                setExpenses((prev) =>
-                  [...prev].sort((a, b) => a.title.localeCompare(b.title))
-                );
-              }}>
+              <button
+                onClick={() => {
+                  setExpenses((prev) =>
+                    [...prev].sort((a, b) => a.title.localeCompare(b.title))
+                  );
+                }}
+              >
                 <img className="h-[18px]" src={UpArrow} alt="" />
               </button>
             </th>
@@ -114,9 +117,18 @@ function Table({
           })}
 
           <tr>
-            <td className="border-black border" colSpan={2}>
-              Total
+            <td>
+              {" "}
+              <button
+                className="font-bold"
+                onClick={() => {
+                  setExpenses([...originalExpenses]);
+                }}
+              >
+                reset sort
+              </button>
             </td>
+            <td className="border-black border">Total</td>
 
             <td>{total}</td>
           </tr>
