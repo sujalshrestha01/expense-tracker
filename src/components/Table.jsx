@@ -68,6 +68,7 @@ function Table({
                 <option value="medicine">Medicine</option>
               </select>
             </th>
+            <th className="border-black border">Date</th>
             <th className="border-black">
               Amount{" "}
               <button
@@ -107,13 +108,14 @@ function Table({
               >
                 <td className="border-black border">{expense.title}</td>
                 <td className="border-black border">{expense.category}</td>
+                <td className="border-black border">{expense.date} </td>
                 <td className="border-black border">{expense.amount} </td>
               </tr>
             );
           })}
 
           <tr>
-            <td className="border-black border" colSpan={2}>
+            <td className="border-black border" colSpan={3}>
               Total
             </td>
 

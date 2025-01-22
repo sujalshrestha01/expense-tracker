@@ -14,6 +14,7 @@ function App() {
     title: "",
     category: "",
     amount: "",
+    date:""
   });
   const [editingRowID, setEditingRowID] = useLocalStorage("editingRowID", "");
 

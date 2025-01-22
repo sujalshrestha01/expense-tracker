@@ -1,10 +1,11 @@
 import React from "react";
 
-function Input({ label, id, name, value, onChange, error }) {
+function Input({ type, label, id, name, value, onChange, error }) {
   return (
     <div className="flex flex-col w-[300px] mb-5 relative">
       <label htmlFor={id}>{label}</label>
       <input
+        type={type}
         className="border border-black outline-none"
         name={name}
         id={id}

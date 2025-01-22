@@ -19,10 +19,11 @@ function Form({
     category: [{ required: true, message: "category is req" }],
     amount: [
       { required: true, message: "amount is req" },
-      {pattern:/^\d+(\.\d+)?$/, message:'enter valid number'},
+      { pattern: /^\d+(\.\d+)?$/, message: "enter valid number" },
       { positiveValue: true, message: "enter positive value" },
       // { number: true, message: "enter a number" },
     ],
+    date: [],
     id: [],
   };
   const validate = (formData) => {
@@ -32,7 +33,7 @@ function Form({
         if (rule.required && !value) {
           errors[key] = rule.message;
         }
-        if(rule.pattern && !rule.pattern.test(value)){
+        if (rule.pattern && !rule.pattern.test(value)) {
           errors[key] = rule.message;
         }
 
@@ -82,6 +83,7 @@ function Form({
       title: "",
       category: "",
       amount: "",
+      date: "",
     });
   };
 
@@ -113,6 +115,7 @@ function Form({
           </p>
         </div> */}
         <Input
+          type="text"
           label="Title"
           id="title"
           name="title"
@@ -170,12 +173,22 @@ function Form({
           </p>
         </div> */}
         <Input
+          type="text"
           label="amount"
           id="amount"
           name="amount"
           value={expense.amount}
           onChange={handleChange}
           error={error.amount}
+        />
+        <Input
+          type="date"
+          label="date"
+          id="date"
+          name="date"
+          value={expense.date}
+          onChange={handleChange}
+          error={error.date}
         />
         <input
           type="submit"
