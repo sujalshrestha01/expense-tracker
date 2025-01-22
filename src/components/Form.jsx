@@ -195,7 +195,7 @@ function Form({
         <input
           type="submit"
           value={`${editingRowID ? "SAVE" : "ADD"}`}
-          className=" bg-red-600 border border-black w-[300px] "
+          className= {`${editingRowID? "bg-green-600": "bg-red-600"} bg-red-600 border border-black w-[300px] `}
         />
       </form>
     </div>
