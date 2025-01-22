@@ -29,6 +29,8 @@ function Table({
   );
   return (
     <div>
+      <h2 className="text-xl text-center">Expense Table</h2>
+
       <ContextMenu
         setEditingRowID={setEditingRowID}
         expenses={expenses}

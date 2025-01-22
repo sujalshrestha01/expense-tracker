@@ -24,7 +24,7 @@ function App() {
     <>
       <Header />
       <div
-        className="flex justify-around"
+        className="flex md:flex-row  md:justify-around md:items-start flex-col items-center justify-center "
         onClick={() => {
           if (pointerPosition.left) {
             setPointerPosition({});

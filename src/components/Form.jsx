@@ -98,7 +98,8 @@ function Form({
   //  }
 
   return (
-    <div>
+    <div className="mb-12">
+      <h2 className="text-xl text-center">Expense Form</h2>
       <form action="" onSubmit={handleSubmit}>
         {/* <div className="flex flex-col w-[300px] mb-5 relative">
           <label htmlFor="title">Title</label>
