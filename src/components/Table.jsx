@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from "react";
 import { useFilter } from "../hooks/useFilter";
 import ContextMenu from "./ContextMenu";
@@ -14,7 +13,6 @@ function Table({
   setPointerPosition,
 }) {
   const [rowId, setRowId] = useState("");
-  const [originalExpenses] = useState(expenses);
   // const [selectedCategory, setSelectedCategory] = useState("")
   // let handlefilterCategory=(e)=>{
   //     setSelectedCategory(e.target.value)
@@ -25,12 +23,10 @@ function Table({
   // : expenses;
 
   const [filteredData, setQuery] = useFilter(expenses, (data) => data.category);
-
   let total = filteredData.reduce(
     (acc, expense) => acc + Number(expense.amount),
     0
   );
-  console.log("rendering");
   return (
     <div>
       <ContextMenu
@@ -117,18 +113,9 @@ function Table({
           })}
 
           <tr>
-            <td>
-              {" "}
-              <button
-                className="font-bold"
-                onClick={() => {
-                  setExpenses([...originalExpenses]);
-                }}
-              >
-                reset sort
-              </button>
+            <td className="border-black border" colSpan={2}>
+              Total
             </td>
-            <td className="border-black border">Total</td>
 
             <td>{total}</td>
           </tr>

@@ -5,28 +5,36 @@ import Form from "./components/Form";
 import Table from "./components/Table";
 import Header from "./components/Header";
 import ExpenseData from "./ExpenseData";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 
 function App() {
-  const [expenses, setExpenses] = useState(ExpenseData);
+  const [expenses, setExpenses] = useLocalStorage("expenses", ExpenseData);
   const [pointerPosition, setPointerPosition] = useState({});
-  const [expense, setExpense] = useState({
-      title: "",
-      category: "",
-      amount: "",
-    });
-  const [editingRowID, setEditingRowID] = useState('')
+  const [expense, setExpense] = useLocalStorage("expense", {
+    title: "",
+    category: "",
+    amount: "",
+  });
+  const [editingRowID, setEditingRowID] = useLocalStorage("editingRowID", "");
 
   return (
     <>
       <Header />
       <div
         className="flex justify-around"
-        onClick={() =>{ 
-          if(pointerPosition.left){
-            setPointerPosition({})}}
+        onClick={() => {
+          if (pointerPosition.left) {
+            setPointerPosition({});
           }
+        }}
       >
-        <Form editingRowID={editingRowID} setEditingRowID={setEditingRowID} setExpenses={setExpenses} expense={expense} setExpense={setExpense} />
+        <Form
+          editingRowID={editingRowID}
+          setEditingRowID={setEditingRowID}
+          setExpenses={setExpenses}
+          expense={expense}
+          setExpense={setExpense}
+        />
         <Table
           setEditingRowID={setEditingRowID}
           setExpenses={setExpenses}
