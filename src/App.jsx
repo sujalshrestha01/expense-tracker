@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { getTodayDate } from "./utils/dateUtils";
 
 import "./App.css";
 import Form from "./components/Form";
@@ -10,11 +11,12 @@ import { useLocalStorage } from "./hooks/useLocalStorage";
 function App() {
   const [expenses, setExpenses] = useLocalStorage("expenses", ExpenseData);
   const [pointerPosition, setPointerPosition] = useState({});
+
   const [expense, setExpense] = useLocalStorage("expense", {
     title: "",
     category: "",
     amount: "",
-    date:""
+    date: getTodayDate(),
   });
   const [editingRowID, setEditingRowID] = useLocalStorage("editingRowID", "");
 

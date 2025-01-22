@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import Input from "./Input";
 import SelectOption from "./SelectOption";
+import { getTodayDate } from "../utils/dateUtils";
 
 function Form({
   setExpenses,
@@ -83,7 +84,7 @@ function Form({
       title: "",
       category: "",
       amount: "",
-      date: "",
+      date: getTodayDate(),
     });
   };
 

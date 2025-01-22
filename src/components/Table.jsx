@@ -68,7 +68,31 @@ function Table({
                 <option value="medicine">Medicine</option>
               </select>
             </th>
-            <th className="border-black border">Date</th>
+            <th className="border-black border">
+              Date
+              <button
+                onClick={() => {
+                  setExpenses((prev) =>
+                    [...prev].sort(
+                      (a, b) => new Date(a.date) - new Date(b.date)
+                    )
+                  );
+                }}
+              >
+                <img className="h-[18px]" src={UpArrow} alt="" />
+              </button>
+              <button
+                onClick={() => {
+                  setExpenses((prev) =>
+                    [...prev].sort(
+                      (a, b) => new Date(b.date) - new Date(a.date)
+                    )
+                  );
+                }}
+              >
+                <img className="h-[18px]" src={DownArrow} alt="" />
+              </button>
+            </th>
             <th className="border-black">
               Amount{" "}
               <button
